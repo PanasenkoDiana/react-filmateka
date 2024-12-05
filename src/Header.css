@@ -1,0 +1,56 @@
+#header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    background-color: #E9EAED;
+    padding: 15px;
+}
+
+.account{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.account p{
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.account img{
+    width: 50px;
+}
+
+.search-and-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.search-and-main p{
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.search-bar{
+    height: 40px;
+    width: 600px;
+    background-color: white;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.search-bar img{
+    height: 25px;
+    width: auto;
+}
+
+/* .camera-img{ */
+    /* width: 60px; */
+/* } */

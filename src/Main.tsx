@@ -1,8 +1,11 @@
 import './Main.css'
+import { Header } from './Header';
+
 
 export function Main() {
     return (
         <div id='page'>
+            <Header></Header>
             <div id='main'>
                 <div id='newFilms'>
                     <h1 id='newFilmsText' className=''>Найсвіжіші прем'єри</h1>
