@@ -1,18 +1,19 @@
-import { Header } from "./Header/Header"
-import { Main} from './Main/Main'
-import { Footer } from "./Footer/Footer"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { Layout } from './Layout/Layout'
+import { Main } from './Main/Main'
+import { MoviesPage } from './MoviesPage/MoviesPage'
 
 export function App() {
     return (
         <div>
             <BrowserRouter>
-                <Header />
                 <Routes>
-                    <Route path="/" element={<Main />} />
+                    <Route element={<Layout/>}>
+                        <Route path='/' element={<Main/>} />
+                        <Route path='/movies' element={<MoviesPage/>} />
+                    </Route>
                 </Routes>
-                <Footer />
             </BrowserRouter>
         </div>
-    );
+    )
 }

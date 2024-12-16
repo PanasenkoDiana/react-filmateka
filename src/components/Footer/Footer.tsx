@@ -45,6 +45,6 @@ export function Footer() {
             <div className="footer-contact">
                 <p>support@filmoteka.net</p>
             </div>
-        </footer>
+            </footer>
     );
 }

@@ -1,0 +1,43 @@
+.movieCard {
+    width: 220px;
+    height: auto;
+    background-color: white;
+    border-radius: 20px;
+    display: block flex;
+    flex-direction: column;
+    z-index: auto;
+}
+
+.movieCardPoster {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    display: block
+}
+
+.movieCardTitle {
+    color: black;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* .movieCard:hover .movieCardTitle {
+    overflow: show;
+    text-wrap: wrap;
+} */
+
+.movieCardInfo {
+    padding: 10px;
+}
+
+.movieCardDetails p {
+    color: black;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* .movieCard:hover .movieCardDetails p {
+    overflow: show;
+    text-wrap: wrap;
+} */

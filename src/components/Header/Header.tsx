@@ -11,7 +11,7 @@ export function Header(){
                 <p>Filmateka</p>
                 <div className="search-bar">
                     <img className='camera-img' src="/img/camera.png" alt="camera" />
-                    <img src="/img/keyboard.png" alt="keeyboard" />
+                    <img src="/img/keyboard.png" alt="keyboard" />
                 </div>
             </div>
 
