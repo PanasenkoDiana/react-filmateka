@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { Layout } from './Layout/Layout'
-import { Main } from '../pages/Main/Main'
-import { MoviesPage } from '../pages/MoviesPage/MoviesPage'
+import { Layout } from './shared/Layout/Layout'
+import { Main } from './pages/Main/Main'
+import { MoviesPage } from './pages/MoviesPage/MoviesPage'
 
 export function App() {
     return (
