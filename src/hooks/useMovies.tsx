@@ -5,7 +5,7 @@ export function useMovies() {
 
     useEffect(() => {
         async function getMovies() {
-            const response = await fetch("http://localhost:8000/")
+            const response = await fetch("http://localhost:8000/api/movies")
             const data = await response.json()
             setMovies(data)
         }
