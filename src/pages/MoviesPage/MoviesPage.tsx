@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import { MovieCard } from '../MovieCard/MovieCard'
+import { MovieCard } from '../../shared/MovieCard/MovieCard'
 import { useMovies } from '../../hooks/useMovies'
 import { IMovie } from '../../interfaces'
 
