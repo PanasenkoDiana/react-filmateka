@@ -1,18 +1,6 @@
 import { useState, useEffect } from 'react'
 import { IMovie } from '../interfaces'
 
-// export interface IMovie{
-//     id: number
-//     title: string
-//     year: number
-//     genre : []
-//     runtime: number
-//     director: string
-//     actors: []
-//     poster: string
-//     country: string
-//     plot: string
-// }
 // https://fakestoreapi.com/products/id
 export function useMovieById(id: number) {
     const [movie, setMovie] = useState<IMovie>()
