@@ -5,6 +5,7 @@ import { Actors } from "./MoviePageComponents/Actors/Actors";
 import { Description } from "./MoviePageComponents/Description/Description";
 import { PhotosInFilm } from "./MoviePageComponents/PhotosInFilm/PhotosInFilm";
 import { Reviews } from "./MoviePageComponents/Reviews/Reviews";
+import { useState } from "react";
 
 
 
@@ -13,16 +14,20 @@ export function MoviePage(){
 
     const { movie } = useMovieById(Number(params.id))
 
+    const [selectSecondModal, setSelectSecondModal] = useState('Description')
 
+    function SelectModal(select: string){
+        setSelectSecondModal(select)
+    }
 
     return(
         <div className='MoviePage'>
             <div className="MainMovie">
                 <div className="Container">
-                    <img src={movie?.poster} alt="123" />
+                    <img src={movie?.poster}alt="123" />
                     <div className="MainMovieInfo">
                         <div className="JenreAndTime">
-                            <p className="Jenre MainText ">{movie?.genre}</p>
+                            <p className="Jenre MainText ">{movie?.genre} </p>
                             <p className="MainText">|</p>
                             <p className="Time MainText">{movie?.runtime}хв.</p>
                         </div>
@@ -37,23 +42,23 @@ export function MoviePage(){
             <div className="SecondMovie">
                 <div className="Container2">
                     <div className="SecondNavigation">
-                        <button className="NavigationButton">
+                        <button onClick={()=>{SelectModal('Description')}} className={`NavigationButton ${selectSecondModal === "Description" ? "Selected" : ''}`}>
                             Опис
                         </button>
-                        <button className="NavigationButton">
+                        <button onClick={()=>{SelectModal("Actors")}} className={`NavigationButton ${selectSecondModal === "Actors" ? "Selected" : ''}`}>
                             Актери
                         </button>
-                        <button className="NavigationButton">
+                        <button onClick={()=>{SelectModal("PhotosInFilm")}} className={`NavigationButton ${selectSecondModal === "PhotosInFilm" ? "Selected" : ''}`}>
                             Кадри з фільму
                         </button>
-                        <button className="NavigationButton">
+                        <button onClick={()=>{SelectModal('Reviews')}} className={`NavigationButton ${selectSecondModal === "Reviews" ? "Selected" : ''}`}>
                             Відгуки
                         </button>
                     </div>
-                    {/* <Description></Description> */}
-                    {/* <Actors></Actors> */}
-                    {/* <PhotosInFilm></PhotosInFilm> */}
-                    <Reviews></Reviews>
+                    {selectSecondModal === 'Description' && <Description></Description>}
+                    {selectSecondModal === 'Actors' && <Actors></Actors>}
+                    {selectSecondModal === 'PhotosInFilm' && <PhotosInFilm></PhotosInFilm>}
+                    {selectSecondModal === 'Reviews' && <Reviews></Reviews>}
                 </div>
             </div>
             

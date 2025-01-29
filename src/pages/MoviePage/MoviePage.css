@@ -184,6 +184,11 @@
     /* font-size: 28px; */
 }
 
+.Selected{
+    /* color: red; */
+    border-bottom: 5px solid #ED501B;
+}
+
 
 .Description{
     display: flex;
