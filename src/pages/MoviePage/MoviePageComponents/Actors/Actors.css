@@ -1,0 +1,67 @@
+.ActorsContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding: 10px;
+    gap: 40px;
+    padding-bottom: 30px;
+
+}
+
+.ActorCard{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* padding: 10px; */
+    gap: 10px;
+
+    /* width: 163px;
+    height: 82px; */
+}
+
+.ActorImage{
+    width: 60px;
+    height: 60px;
+
+    border-radius: 1000px;
+}
+
+.ActorTextDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* padding: 5px ; */
+    gap: 2px;
+}
+
+.ActorName{
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.ActorNameInEn{
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #A3A3A3;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}

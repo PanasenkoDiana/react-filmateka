@@ -14,7 +14,7 @@ export function MovieCard(props: IMovie) {
 
     return (
         <div className="movieCard">
-            <Link to={`/movie/${props.id}`}>
+            <Link to={`/movie/${props.id}`} onClick={() => window.scrollTo(0, 0)}>
                 <img className="movieCardPoster" src={props.poster} alt="" />
                 <div className="movieCardInfo">
                     <h3 className="movieCardTitle">{props.title}</h3>
