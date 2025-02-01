@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
+import { IGenre } from "../interfaces"
 
 export function useGenres() {
-    const [genres, setGenres] = useState([])
+    const [genres, setGenres] = useState< IGenre[] >([])
 
     useEffect(() => {
         async function getGenres() {

@@ -3,10 +3,10 @@ export interface IActor {
     name: string; // Ім'я
     surname?: string; // Призвище
     photo?: string; // Фото
-    films: IFilm[]; // Зв'язок many to many з фільмом
+    movies: IMovie[]; // Зв'язок many to many з фільмом
 }
 
-export interface IFilm {
+export interface IMovie {
     id: number;
     title: string;
     rating?: number;
@@ -15,8 +15,8 @@ export interface IFilm {
     productionCountry: string;
     ageRating: string;
     runtime: number;
-    poster: string;
-    shortDescription: string;
+    poster?: string;
+    shortDescription?: string;
     additionalInfo?: string;
     interestingFacts?: string;
     userReviews: IUserReview[];
@@ -29,23 +29,23 @@ export interface IGenre {
     id: number;
     name: string;
     descriptions?: string;
-    film: IFilm[];
+    movie: IMovie[];
 }
 
 export interface IImage {
     id: number;
     url: string;
-    filmId: number;
-    Film: IFilm;
+    movieId: number;
+    Film: IMovie;
 }
 
 export interface IUserReview {
     id: number;
-    filmId: number;
+    movieId: number;
     userId: number;
     review: string;
     rating: number;
-    Film: IFilm;
+    Film: IMovie;
     User: IUser;
 }
 
