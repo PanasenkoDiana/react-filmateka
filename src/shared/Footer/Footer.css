@@ -1,4 +1,10 @@
-.footer {
+.footer{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.footer-container {
   background-color: #f8f8f8;
   padding: 20px;
   display: flex;

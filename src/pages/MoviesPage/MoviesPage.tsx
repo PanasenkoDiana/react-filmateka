@@ -40,11 +40,18 @@ export function MoviesPage(){
     return (
         <div id="moviesPage">
             <div id="filtersContainer">
-                <div>
-                    <p id="filterGenreText">Жанр:</p>
+                <div id="filterGenresContainer">
+                    <h4 id="filterGenresText">Жанр:</h4>
                     {genres.map((genre) =>
-                    <div>
-                        <input type="checkbox" name={ genre.name } value={ genre.name } onChange={() => {selectGenres(genre.name)}}/>
+                    <div className='filterGenreBox'>
+                        <input 
+                            type="checkbox"
+                            id={ genre.name }
+                            className='genreCheckbox'
+                            name={ genre.name }
+                            value={ genre.name }
+                            onChange={() => {selectGenres(genre.name)}}
+                        ></input>
                         <label htmlFor={ genre.name } className="genreLabel">{ genre.name }</label>
                     </div>
                     )}
