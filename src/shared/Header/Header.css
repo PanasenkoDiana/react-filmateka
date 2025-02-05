@@ -7,50 +7,117 @@
     padding: 15px;
 }
 
-.account{
+.LogoAndNavigationHeader{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center;    
+    justify-content: start;
+    gap: 30px;
+}
+
+.LogoContainer{
+    display: flex;
+    align-items: center;    
+    justify-content: start;
+    gap: 5px;
+}
+
+.LogoContainer img{
+    width: 100px;
+    height: 70px;
+}
+
+.LogoContainer p{
+    font-family: 'Righteous';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    /* box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.96); */
+}
+
+.NavigationHeader{
+    display: flex;
+    align-items: center;    
+    justify-content: start;
+    gap: 25px;
+}
+
+.NavigationHeader p{
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height */
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    color: #767D8D;
+}
+
+.SearchBarAndAccountHeader{
+    display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 25px;
 }
 
-.account p{
-    font-size: 40px;
-    font-weight: bolder;
-}
-
-.account img{
-    width: 50px;
-}
-
-.search-and-main{
+.SearchBar{
+    box-sizing: border-box;
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* padding: 10px; */
+    gap: 10px;
+    width: 356px;
+    height: 37px;
+    background: #FFFFFF;
+    border: 2px solid #767D8D;
+    border-radius: 5px;
+}
+
+.SearchBar img{
+    width: 21px;
+    height: 21px;
+}
+
+.SearchBar input{
+    height: 100%;
+    width: 100%;
+    border: none;
+    background: none;
+    font-family: 'Righteous';
+    /* text-align: start; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    /* display: flex; */
+    /* align-items: flex-start; */
+    /* text-align: center; */
+    color: #767D8D;
+}
+
+.AuthButtonHeader{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
-    gap: 20px;
+    /* padding: 4px 26px; */
+    gap: 10px;
+    width: 120px;
+    height: 30px;
+    background: #767D8D;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    border: none;
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
 }
-
-.search-and-main p{
-    font-size: 40px;
-    font-weight: bolder;
-}
-
-.search-bar{
-    height: 40px;
-    width: 600px;
-    background-color: white;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    padding-right: 10px;
-}
-
-.search-bar img{
-    height: 25px;
-    width: auto;
-}
-
-/* .camera-img{ */
-    /* width: 60px; */
-/* } */
