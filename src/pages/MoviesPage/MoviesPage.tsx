@@ -2,53 +2,52 @@ import { useState, useEffect } from 'react'
 
 import { MovieCard } from '../../shared/MovieCard/MovieCard'
 import { useMovies } from '../../hooks/useMovies'
-import { IMovie } from '../../interfaces'
+import { useGenres } from '../../hooks/useGenres';
+
+import { IMovie, IGenre } from '../../interfaces'
 
 import './MoviesPage.css';
 
 export function MoviesPage(){
     const { movies } = useMovies()
+    const { genres } = useGenres()
 
-    const [filteredMovies, setFilteredMovies] = useState([])
-    const [selectedFilter, setSelectedFilter] = useState("All Genres")   
+    const [filteredMovies, setFilteredMovies] = useState< IMovie[] >([])
+    const [checkedGenres, setCheckedGenres] = useState< string[] >([]) 
 
-    const movieGenresSelect = [
-        { en: "All Genres", uk: "Всі жанри" },
-        { en: "Action", uk: "Екшн" },
-        { en: "Adventure", uk: "Пригоди" },
-        { en: "Crime", uk: "Кримінал" },
-        { en: "Drama", uk: "Драма" },
-        { en: "Fantasy", uk: "Фентезі" },
-        { en: "History", uk: "Історія" },
-        { en: "Mystery", uk: "Містика" },
-        { en: "Romance", uk: "Романтика" },
-        { en: "Sci-Fi", uk: "Наукова фантастика" },
-        { en: "Thriller", uk: "Трилер" },
-        { en: "War", uk: "Війна" }
-    ];
+    function selectGenres(genre: string) {
+        if (checkedGenres.includes(genre)){
+            setCheckedGenres(
+                checkedGenres.filter((checkedGenre) => checkedGenre !== genre)
+            )
+        } else {
+            setCheckedGenres([...checkedGenres, genre])
+        }
+    }
 
     useEffect(() => {
-        if (selectedFilter === "All Genres") {
+        if (checkedGenres.length === 0) {
             setFilteredMovies(movies)
         } else {
-            setFilteredMovies(movies.filter((movie: IMovie) => {
-                return movie.genre.includes(selectedFilter)
-            }))
+            setFilteredMovies(
+                movies.filter((movie: IMovie) => {
+                    return checkedGenres.every((genre: string) => movie.genres.some((g: IGenre) => g.name === genre))
+                })
+            )
         }
-    }, [movies, selectedFilter])
+    }, [movies, checkedGenres])
 
     return (
         <div id="moviesPage">
             <div id="filtersContainer">
                 <div>
                     <p id="filterGenreText">Жанр:</p>
-                    <select name="genreSelect" id="genreSelect" onChange={(event) =>
-                        setSelectedFilter(event.target.value)
-                        }>
-                        {movieGenresSelect.map((movieGenresSelect) => 
-                            <option value={ movieGenresSelect.en }>{ movieGenresSelect.uk }</option>
-                        )}
-                    </select>
+                    {genres.map((genre) =>
+                    <div>
+                        <input type="checkbox" name={ genre.name } value={ genre.name } onChange={() => {selectGenres(genre.name)}}/>
+                        <label htmlFor={ genre.name } className="genreLabel">{ genre.name }</label>
+                    </div>
+                    )}
                 </div>
             </div>
             <div id="moviesConteiner">
@@ -57,17 +56,20 @@ export function MoviesPage(){
                     {filteredMovies.map((movie: IMovie) =>{
                         return (
                             <MovieCard
-                                key={movie.id}
-                                id={movie.id}
-                                title={movie.title}
-                                year={movie.year}
-                                genre={movie.genre}
-                                runtime={movie.runtime}
-                                director={movie.director}
-                                actors={movie.actors}
-                                poster={movie.poster}
-                                country={movie.country}
-                                plot={movie.plot}
+                            key={movie.id}
+                            id={movie.id}
+                            title={movie.title}
+                            releaseYear={movie.releaseYear}
+                            mainLanguage={movie.mainLanguage}
+                            productionCountry={movie.productionCountry}
+                            ageRating={movie.ageRating}
+                            shortDescription={movie.shortDescription}
+                            userReviews={movie.userReviews}
+                            genres={movie.genres}
+                            movieStills={movie.movieStills}
+                            runtime={movie.runtime}
+                            actors={movie.actors}
+                            poster={movie.poster}
                             ></MovieCard>
                         )
                     })}

@@ -9,6 +9,8 @@
 }
 
 .movieCardPoster {
+    width: 220px;
+    height: 310px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     display: block
