@@ -17,7 +17,7 @@ export function Header(){
             </div> */}
             <div className="LogoAndNavigationHeader">
                 <div className="LogoContainer">
-                    <img src="../../../public/img/logo.jpg" alt="" />
+                    <img src="/img/logo.jpg" alt="Logo" />
                     <p>FILMATEKA</p>
                 </div>
                 <div className="NavigationHeader">
@@ -31,7 +31,7 @@ export function Header(){
             </div>
             <div className="SearchBarAndAccountHeader">
                 <div className="SearchBar">
-                    <img src="../../../public/img/search.jpg" alt="search" />
+                    <img src="/img/search.jpg" alt="search" />
                     <input type="text" placeholder="Швидкий пошук" />
                 </div>
                 <button className="AuthButtonHeader">Увійти</button>
