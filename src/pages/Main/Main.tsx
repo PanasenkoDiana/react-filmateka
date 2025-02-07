@@ -17,7 +17,7 @@ export function Main() {
                 <div key={index} className="category">
                     <h2 className="category-title">{category} ➤</h2>
                     <div className="movies-container">
-                        {Array(6).fill(0).map((_, i) => (
+                        {Array(5).fill(0).map((_, i) => (
                             <img key={i} className="movie-poster" src="https://www.sonypictures.co.uk/sites/unitedkingdom/files/styles/max_n_x_365_/public/2024-10/2481_SP_VENOM_POSTER_1-Sheet_OutNow.jpg?itok=cyDlYZBK" alt="Веном: Останній танець" />
                         ))}
                     </div>
