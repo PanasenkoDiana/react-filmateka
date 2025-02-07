@@ -1,7 +1,6 @@
 import './Main.css';
 import { useRecentlyViewed } from '../../context/RecentlyViewedContext';
-
-// interface i
+import { IMovie } from '../../interfaces'; 
 
 export function Main() {
     const recentlyViewed = useRecentlyViewed();
@@ -17,9 +16,9 @@ export function Main() {
             {["Новинки", "У топах", "Рекомендації"].map((category, index) => (
                 <div key={index} className="category">
                     <h2 className="category-title">{category} ➤</h2>
-                    <div className="films-container">
+                    <div className="movies-container">
                         {Array(6).fill(0).map((_, i) => (
-                            <img key={i} className="film-poster" src="https://www.sonypictures.co.uk/sites/unitedkingdom/files/styles/max_n_x_365_/public/2024-10/2481_SP_VENOM_POSTER_1-Sheet_OutNow.jpg?itok=cyDlYZBK" alt="Веном: Останній танець" />
+                            <img key={i} className="movie-poster" src="https://www.sonypictures.co.uk/sites/unitedkingdom/files/styles/max_n_x_365_/public/2024-10/2481_SP_VENOM_POSTER_1-Sheet_OutNow.jpg?itok=cyDlYZBK" alt="Веном: Останній танець" />
                         ))}
                     </div>
                 </div>
@@ -29,8 +28,8 @@ export function Main() {
                 <h2 className="category-title">Нещодавно переглянуті ➤</h2>
                 <div className="films-container">
                     {recentlyViewed.length > 0 ? (
-                        recentlyViewed.map((film) => (
-                            <img key={film.id} className="film-poster" src={film.film.posterUrl} alt={film.film.title} />
+                        recentlyViewed.map((movie: IMovie) => (
+                            <img key={movie.id} className="movie-poster" src={movie.poster} alt={movie.title} />
                         ))
                     ) : (
                         <p className="empty-text">Поки що немає переглянутих фільмів</p>
