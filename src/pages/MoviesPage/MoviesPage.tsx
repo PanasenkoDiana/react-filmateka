@@ -41,7 +41,7 @@ export function MoviesPage(){
         <div id="moviesPage">
             <div id="filtersContainer">
                 <div id="filterGenresContainer">
-                    <h4 id="filterGenresText">Жанр:</h4>
+                    <h3 id="filterGenresText">Жанр:</h3>
                     {genres.map((genre) =>
                     <div className='filterGenreBox'>
                         <input 
