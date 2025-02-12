@@ -1,0 +1,275 @@
+* {
+    margin: 0;
+    padding: 0;
+    height: auto;
+}
+
+#page{
+    background-color: #14181D;
+    /* overflow-x: hidden; */
+}
+
+#newFilms{
+    padding: 20px;
+}
+
+#newFilmsText{
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+#newFilmsCont {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.newFilmsImg{
+    border-radius: 5px;
+    width: 200px;
+}
+
+.newFilmsListBtn{
+    border: none;
+    background-color: #14181D;
+}
+
+.newFilmsListBtnImg{
+    width: 100px;
+    filter: invert(1);
+}
+
+#newFilmsListBtnRightImg{
+    transform: rotate(180deg);
+}
+
+#buttons{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #E9EAED;
+    height: 80px;
+    align-items: center;
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
+.button{
+    font-size: 22px;
+    padding: 20px;
+    height: 50px;
+    background-color: #767D8D;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    color: #E9EAED;
+    font-weight: bolder;
+    transition: all 300ms ease;
+}
+
+.button:hover{
+    background-color: #000000;
+    transition: all 300ms ease;
+}
+
+#articleCont{
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#articleText{
+    color: white;
+    font-weight: bold;
+}
+
+#articleRandom{
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+    border: #767D8D solid 10px;
+    border-radius: 5px;
+    display: flex;
+    width: 800px;
+}
+
+#articleRandom p {
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+.main-container {
+    min-height: 100vh;
+    background-color: #1a1a1a;
+    color: white;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.hero-section {
+    background-image: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%), url('https://www.sonypictures.co.uk/sites/unitedkingdom/files/styles/max_n_x_365_/public/2024-10/2481_SP_VENOM_POSTER_1-Sheet_OutNow.jpg?itok=cyDlYZBK');
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    margin-bottom: 60px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    font-size: 64px;
+    margin-bottom: 30px;
+    font-weight: 800;
+}
+
+.hero-content p {
+    font-size: 24px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.start-button {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    padding: 15px 40px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    backdrop-filter: blur(5px);
+}
+
+.start-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.movies-section {
+    margin-bottom: 60px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.section-header h2 {
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.see-all {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.see-all:hover {
+    color: white;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+@media (max-width: 1200px) {
+    main {
+        padding: 20px 40px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .movies-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+    }
+
+    .hero-content h1 {
+        font-size: 56px;
+    }
+
+    .hero-content p {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .movies-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    .hero-section {
+        height: 400px;
+        padding: 0 30px;
+    }
+
+    .hero-content h1 {
+        font-size: 48px;
+    }
+
+    .hero-content p {
+        font-size: 18px;
+    }
+
+    .section-header h2 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .movies-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .hero-section {
+        height: 300px;
+        padding: 0 20px;
+    }
+    
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    .section-header h2 {
+        font-size: 24px;
+    }
+
+    main {
+        padding: 10px 20px;
+    }
+}

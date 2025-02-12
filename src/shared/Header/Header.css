@@ -1,0 +1,126 @@
+#header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    background-color: #E9EAED;
+    padding: 15px;
+}
+
+.account{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.account p{
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.account img{
+    width: 50px;
+}
+
+.search-and-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.search-and-main p{
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.search-bar{
+    height: 40px;
+    width: 600px;
+    background-color: white;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.search-bar img{
+    height: 25px;
+    width: auto;
+}
+
+.header {
+    background-color: #1c1c1e;
+    padding: 20px 0;
+    border-bottom: 1px solid #333;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.logo-text {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.search-box {
+    flex: 1;
+    max-width: 400px;
+    margin: 0 20px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background-color: #2c2c2e;
+    color: white;
+}
+
+.auth-button {
+    background-color: #666;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.auth-button:hover {
+    background-color: #555;
+}
+
+.header-content a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.header-content a:hover {
+    color: #ccc;
+}
+
+/* .camera-img{ */
+    /* width: 60px; */
+/* } */
