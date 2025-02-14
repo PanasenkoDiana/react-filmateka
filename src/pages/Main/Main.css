@@ -1,101 +1,72 @@
 * {
     margin: 0;
     padding: 0;
-    height: auto;
+    box-sizing: border-box;
 }
 
-#page{
+#page {
     background-color: #14181D;
-}
-
-#newFilms{
-    padding: 20px;
-}
-
-#newFilmsText{
-    display: flex;
-    justify-content: center;
     color: white;
+    font-family: Arial, sans-serif;
 }
 
-#newFilmsCont {
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
 
-.newFilmsImg{
-    border-radius: 5px;
-    width: 200px;
-}
-
-.newFilmsListBtn{
-    border: none;
+#banner {
     background-color: #14181D;
-}
-
-.newFilmsListBtnImg{
-    width: 100px;
-    filter: invert(1);
-}
-
-#newFilmsListBtnRightImg{
-    transform: rotate(180deg);
-}
-
-#buttons{
-    display: flex;
-    justify-content: space-evenly;
-    background-color: #E9EAED;
-    height: 80px;
-    align-items: center;
-    padding-left: 200px;
-    padding-right: 200px;
-}
-
-.button{
-    font-size: 22px;
-    padding: 20px;
-    height: 50px;
-    background-color: #767D8D;
-    border: none;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    color: #E9EAED;
-    font-weight: bolder;
-    transition: all 300ms ease;
-}
-
-.button:hover{
-    background-color: #000000;
-    transition: all 300ms ease;
-}
-
-#articleCont{
-    padding: 50px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
 }
 
-#articleText{
-    color: white;
+.banner-title {
+    font-size: 3rem;
     font-weight: bold;
 }
 
-#articleRandom{
-    background-color: white;
-    padding: 20px;
-    margin-top: 20px;
-    border: #767D8D solid 10px;
-    border-radius: 5px;
-    display: flex;
-    width: 800px;
+.banner-text {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-top: 10px;
 }
 
-#articleRandom p {
-    font-weight: bolder;
-    font-size: 18px;
+.banner-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.banner-button:hover {
+    background-color: #0056b3;
+}
+
+
+.category {
+    padding: 20px;
+}
+
+.category-title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.films-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.film-poster {
+    width: 180px;
+    border-radius: 5px;
 }
