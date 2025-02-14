@@ -4,7 +4,7 @@ import { MovieCard } from '../../shared/MovieCard/MovieCard'
 import { useMovies } from '../../hooks/useMovies'
 import { useGenres } from '../../hooks/useGenres';
 
-import { IMovie, IGenre } from '../../interfaces'
+import { IMovie, IGenre } from '../../shared/types/types'
 
 import './MoviesPage.css';
 
@@ -75,9 +75,10 @@ export function MoviesPage(){
                             genres={movie.genres}
                             movieStills={movie.movieStills}
                             runtime={movie.runtime}
-                            actors={movie.actors}
+                            persons={movie.persons}
                             poster={movie.poster}
-                            ></MovieCard>
+                            recentlyViewedMovie={movie.recentlyViewedMovie}
+                          />
                         )
                     })}
                 </div>

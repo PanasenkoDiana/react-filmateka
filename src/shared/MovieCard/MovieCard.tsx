@@ -1,7 +1,6 @@
-import { useEffect } from "react"
 import { Link } from "react-router-dom"
 
-import { IGenre, IMovie } from "../../interfaces"
+import { IGenre, IMovie } from "../types/types"
 
 import "./MovieCard.css"
 

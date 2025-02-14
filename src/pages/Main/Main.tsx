@@ -1,6 +1,6 @@
 import './Main.css';
 import { useRecentlyViewed } from '../../context/RecentlyViewedContext';
-import { IMovie } from '../../interfaces'; 
+import { IMovie } from '../../shared/types/types'; 
 
 export function Main() {
     const recentlyViewed = useRecentlyViewed();

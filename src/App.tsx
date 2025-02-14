@@ -4,6 +4,7 @@ import { Main } from './pages/Main/Main'
 import { MoviesPage } from './pages/MoviesPage/MoviesPage'
 import { MoviePage } from "./pages/MoviePage/MoviePage"
 import { RecentlyViewedProvider } from "./context/RecentlyViewedContext"
+import { PersonPage } from "./pages/PersonPage/PersonPage"
 
 export function App() {
     return (
@@ -14,6 +15,7 @@ export function App() {
                         <Route path='/' element={<Main />} />
                         <Route path='/movies' element={<MoviesPage />} />
                         <Route path='/movie/:id' element={<MoviePage />} />
+                        <Route path='/person/:id' element={<PersonPage/>}></Route>
                     </Route>
                 </Routes>
             </BrowserRouter>

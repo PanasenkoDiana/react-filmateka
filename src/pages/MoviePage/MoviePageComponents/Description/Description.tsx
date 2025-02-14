@@ -1,4 +1,4 @@
-import { IMovie } from "../../../../interfaces";
+import { IMovie } from "../../../../shared/types/types";
 import './Description.css'
 import { useMovieById } from "../../../../hooks/useMovieById";
 import { useParams } from "react-router-dom";

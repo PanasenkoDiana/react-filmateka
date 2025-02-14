@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { IMovie } from '../interfaces'
+import { IMovie } from '../shared/types/types'
 
 // https://fakestoreapi.com/products/id
 export function useMovieById(id: number) {
-    const [movie, setMovie] = useState<IMovie>()
+    const [movie, setMovie] = useState< IMovie >()
 
     useEffect(() => {
         async function getMovie() {
