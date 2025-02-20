@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { IMovie } from '../interfaces';
+import { IMovie } from '../shared/types/types'
 
 interface RecentlyViewedContextType {
   recentlyViewed: IMovie[];

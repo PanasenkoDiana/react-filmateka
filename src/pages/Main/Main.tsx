@@ -1,75 +1,37 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecentlyViewed } from '../../context/RecentlyViewedContext';
-import type { IMovie } from '../../interfaces';
+import { useMovies } from '../../hooks/useMovies';
 import { MovieCard } from '../../shared/MovieCard/MovieCard';
 import './Main.css';
 
-const demoMovies: IMovie[] = [
-    {
-        id: 1,
-        title: "Веном",
-        poster: "https://www.sonypictures.co.uk/sites/unitedkingdom/files/styles/max_n_x_365_/public/2024-10/2481_SP_VENOM_POSTER_1-Sheet_OutNow.jpg?itok=cyDlYZBK",
-        year: 2024,
-        genre: ["Фантастика", "Бойовик"],
-        runtime: 112,
-        director: "Енді Серкіс",
-        actors: ["Том Харді", "Мішель Вільямс", "Вуді Харрельсон"],
-        country: "США"
-    },
-    {
-        id: 2,
-        title: "Веном 2",
-        poster: "https://www.sonypictures.co.uk/sites/unitedkingdom/files/styles/max_n_x_365_/public/2024-10/2481_SP_VENOM_POSTER_1-Sheet_OutNow.jpg?itok=cyDlYZBK",
-        year: 2024,
-        genre: ["Фантастика", "Бойовик"],
-        runtime: 115,
-        director: "Енді Серкіс",
-        actors: ["Том Харді", "Мішель Вільямс", "Вуді Харрельсон"],
-        country: "США"
-    },
-    {
-        id: 3,
-        title: "Веном 3",
-        poster: "https://www.sonypictures.co.uk/sites/unitedkingdom/files/styles/max_n_x_365_/public/2024-10/2481_SP_VENOM_POSTER_1-Sheet_OutNow.jpg?itok=cyDlYZBK",
-        year: 2024,
-        genre: ["Фантастика", "Бойовик"],
-        runtime: 112,
-        director: "Енді Серкіс",
-        actors: ["Том Харді", "Мішель Вільямс", "Вуді Харрельсон"],
-        country: "США"
-    },
-    {
-        id: 4,
-        title: "Веном 4",
-        poster: "https://www.sonypictures.co.uk/sites/unitedkingdom/files/styles/max_n_x_365_/public/2024-10/2481_SP_VENOM_POSTER_1-Sheet_OutNow.jpg?itok=cyDlYZBK",
-        year: 2024,
-        genre: ["Фантастика", "Бойовик"],
-        runtime: 115,
-        director: "Енді Серкіс",
-        actors: ["Том Харді", "Мішель Вільямс", "Вуді Харрельсон"],
-        country: "США"
-    },
-    {
-        id: 5,
-        title: "Веном 5",
-        poster: "https://www.sonypictures.co.uk/sites/unitedkingdom/files/styles/max_n_x_365_/public/2024-10/2481_SP_VENOM_POSTER_1-Sheet_OutNow.jpg?itok=cyDlYZBK",
-        year: 2024,
-        genre: ["Фантастика", "Бойовик"],
-        runtime: 112,
-        director: "Енді Серкіс",
-        actors: ["Том Харді", "Мішель Вільямс", "Вуді Харрельсон"],
-        country: "США"
-    }
-];
-
 export function Main() {
-    const [movies, setMovies] = useState<IMovie[]>([]);
+    const { movies } = useMovies();
     const { recentlyViewed } = useRecentlyViewed();
 
-    useEffect(() => {
-        setMovies(demoMovies);
-    }, []);
+    // Сортируем фильмы по году выпуска для новинок (от самых новых)
+    const sortedMoviesByYear = movies.sort((a, b) => b.releaseYear - a.releaseYear);
+    const lastFiveMovies = sortedMoviesByYear.slice(0, 5); // Берем только последние 5 фильмов
+
+    // Сортируем фильмы по рейтингу для топов (от самого высокого к низкому)
+    const sortedMoviesByRating = movies
+        .filter(movie => movie.rating) // Фильтруем фильмы без рейтинга
+        .sort((a, b) => b.rating! - a.rating!); // Сортируем по рейтингу
+    const topFiveMovies = sortedMoviesByRating.slice(0, 5); // Берем только топ 5 фильмов
+
+    // Ограничиваем количество недавно просмотренных фильмов до 5
+    const lastFiveViewed = recentlyViewed.slice(0, 5); // Берем только последние 5 фильмов
+
+    // Собираем все жанры из недавно просмотренных фильмов
+    const recentlyViewedGenres = new Set(
+        lastFiveViewed.flatMap(movie => movie.genres.map(genre => genre.name)) // Получаем все жанры
+    );
+
+    // Рекомендуем фильмы, которые соответствуют хотя бы одному жанру из недавно просмотренных
+    const recommendedMovies = movies
+        .filter(movie =>
+            movie.genres.some(genre => recentlyViewedGenres.has(genre.name)) // Проверяем, есть ли хотя бы один жанр
+        )
+        .slice(0, 5); // Ограничиваем количество рекомендаций до 5
 
     return (
         <div className="main-container">
@@ -88,7 +50,7 @@ export function Main() {
                         <Link to="/movies" className="see-all">{'>'}</Link>
                     </div>
                     <div className="movies-grid">
-                        {movies.map(movie => (
+                        {lastFiveMovies.map(movie => (
                             <MovieCard key={movie.id} {...movie} />
                         ))}
                     </div>
@@ -100,7 +62,7 @@ export function Main() {
                         <Link to="/top" className="see-all">{'>'}</Link>
                     </div>
                     <div className="movies-grid">
-                        {movies.map(movie => (
+                        {topFiveMovies.map(movie => (
                             <MovieCard key={movie.id} {...movie} />
                         ))}
                     </div>
@@ -112,7 +74,7 @@ export function Main() {
                         <Link to="/recommendations" className="see-all">{'>'}</Link>
                     </div>
                     <div className="movies-grid">
-                        {movies.map(movie => (
+                        {recommendedMovies.map(movie => (
                             <MovieCard key={movie.id} {...movie} />
                         ))}
                     </div>
@@ -123,7 +85,7 @@ export function Main() {
                         <h2>Нещодавно переглянуті</h2>
                     </div>
                     <div className="movies-grid">
-                        {recentlyViewed.map(movie => (
+                        {lastFiveViewed.map(movie => (
                             <MovieCard key={movie.id} {...movie} />
                         ))}
                     </div>

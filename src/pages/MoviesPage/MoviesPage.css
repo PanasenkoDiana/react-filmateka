@@ -7,12 +7,48 @@
 #filtersContainer {
     display: flex;
     flex-direction: column;
+    width: 100px;
+    font-size: 18px;
 }
 
-
-#filterGenreText{
+#filterGenresText{
     color: white;
 }
+
+.filterGenreBox {
+    display: flex;
+    gap: 5px;
+    width: 100px;
+}
+
+.genreCheckbox {
+    border: none;
+    cursor: pointer;
+    width: 18px;
+    flex-shrink: 0;
+    border-radius: 10px;
+}
+
+.genreCheckbox:checked {
+    cursor: pointer;
+}
+
+.genreLabel {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.genreLabel:hover {
+    display: flex;
+    gap: 5px;
+    color: gray;
+    cursor: pointer;
+}
+
 
 #moviesConteiner {
     width: 100%;
@@ -30,4 +66,8 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
+}
+
+.genreLabel {
+    color: white;
 }

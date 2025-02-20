@@ -22,7 +22,6 @@ export function Register() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // TODO: Add validation and registration logic
         console.log('Registration attempt with:', formData);
     };
 
@@ -76,7 +75,7 @@ export function Register() {
                     <button type="submit">Зареєструватися</button>
                 </form>
                 <div className="auth-links">
-                    <Link to="/auth">Авторизація</Link>
+                    <Link to="/login">Авторизація</Link>
                     <span> | </span>
                     <span>Реєстрація</span>
                 </div>
