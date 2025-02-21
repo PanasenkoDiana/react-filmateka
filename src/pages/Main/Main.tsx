@@ -1,42 +1,96 @@
+import { Link } from 'react-router-dom';
+import { useRecentlyViewed } from '../../context/RecentlyViewedContext';
+import { useMovies } from '../../hooks/useMovies';
+import { MovieCard } from '../../shared/MovieCard/MovieCard';
 import './Main.css';
 
 export function Main() {
+    const { movies } = useMovies();
+    const { recentlyViewed } = useRecentlyViewed();
+
+    // Сортируем фильмы по году выпуска для новинок (от самых новых)
+    const sortedMoviesByYear = movies.sort((a, b) => b.releaseYear - a.releaseYear);
+    const lastFiveMovies = sortedMoviesByYear.slice(0, 5); // Берем только последние 5 фильмов
+
+    // Сортируем фильмы по рейтингу для топов (от самого высокого к низкому)
+    const sortedMoviesByRating = movies
+        .filter(movie => movie.rating) // Фильтруем фильмы без рейтинга
+        .sort((a, b) => b.rating! - a.rating!); // Сортируем по рейтингу
+    const topFiveMovies = sortedMoviesByRating.slice(0, 5); // Берем только топ 5 фильмов
+
+    // Ограничиваем количество недавно просмотренных фильмов до 5
+    const lastFiveViewed = recentlyViewed.slice(0, 5); // Берем только последние 5 фильмов
+
+    // Собираем все жанры из недавно просмотренных фильмов
+    const recentlyViewedGenres = new Set(
+        lastFiveViewed.flatMap(movie => movie.genres.map(genre => genre.name)) // Получаем все жанры
+    );
+
+    // Рекомендуем фильмы, которые соответствуют хотя бы одному жанру из недавно просмотренных
+    const recommendedMovies = movies
+        .filter(movie =>
+            movie.genres.some(genre => recentlyViewedGenres.has(genre.name)) // Проверяем, есть ли хотя бы один жанр
+        )
+        .slice(0, 5); // Ограничиваем количество рекомендаций до 5
+
     return (
-        <div id='page'>
-            <div id='main'>
-                <div id='newFilms'>
-                    <h1 id='newFilmsText'>Найсвіжіші прем'єри</h1>
-                    <div id='newFilmsCont'>
-                        <span className="newFilmsListBtn" id="newFilmsListBtnLeft">
-                            <img className='newFilmsListBtnImg' src="https://cdn.prod.website-files.com/6365d860c7b7a7191055eb8a/6642368718351baded66e287_65bf4d6df4ca11d2993761ca_chevron-left.svg" alt="" />
-                        </span>
-                        <img className='newFilmsImg' src="https://www.sonypictures.co.uk/sites/unitedkingdom/files/styles/max_n_x_365_/public/2024-10/2481_SP_VENOM_POSTER_1-Sheet_OutNow.jpg?itok=cyDlYZBK" alt="" />
-                        <img className='newFilmsImg' src="https://www.sonypictures.co.uk/sites/unitedkingdom/files/styles/max_n_x_365_/public/2024-10/2481_SP_VENOM_POSTER_1-Sheet_OutNow.jpg?itok=cyDlYZBK" alt="" />
-                        <img className='newFilmsImg' src="https://www.sonypictures.co.uk/sites/unitedkingdom/files/styles/max_n_x_365_/public/2024-10/2481_SP_VENOM_POSTER_1-Sheet_OutNow.jpg?itok=cyDlYZBK" alt="" />
-                        <img className='newFilmsImg' src="https://www.sonypictures.co.uk/sites/unitedkingdom/files/styles/max_n_x_365_/public/2024-10/2481_SP_VENOM_POSTER_1-Sheet_OutNow.jpg?itok=cyDlYZBK" alt="" />
-                        <img className='newFilmsImg' src="https://www.sonypictures.co.uk/sites/unitedkingdom/files/styles/max_n_x_365_/public/2024-10/2481_SP_VENOM_POSTER_1-Sheet_OutNow.jpg?itok=cyDlYZBK" alt="" />
-                        <span className="newFilmsListBtn" id="newFilmsListBtnRight">
-                            <img className='newFilmsListBtnImg' id='newFilmsListBtnRightImg' src="https://cdn.prod.website-files.com/6365d860c7b7a7191055eb8a/6642368718351baded66e287_65bf4d6df4ca11d2993761ca_chevron-left.svg" alt="" />
-                        </span>
+        <div className="main-container">
+            <main>
+                <section className="hero-section">
+                    <div className="hero-content">
+                        <h1>Filmateka</h1>
+                        <p>Місце, де кіно оживає не лише на екрані, а й у твоїх спогадах, відгуках та вподобаннях.</p>
+                        <Link to="/movies" className="start-button">Почнемо зараз!</Link>
                     </div>
-                </div>
-                <div id='buttons'>
-                    <button type='button' className='button'>Популярні запити</button>
-                    <button type='button' className='button'>Український контент</button>
-                </div>
-                <div id='articleCont'>
-                    <h1 id='articleText'>Статті:</h1>
-                    <div id='articleRandom'>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, excepturi omnis sit praesentium ducimus laborum voluptate. Ab doloribus cum fugiat veniam esse! Qui impedit libero omnis. Ea nam maiores labore.
-                            Ea eos facere, itaque modi, consectetur voluptates nulla necessitatibus officiis perferendis explicabo atque quos sunt dicta enim mollitia libero iusto delectus reprehenderit. Ea dolorem minus debitis repellendus aliquid officiis accusamus!
-                            Explicabo totam accusamus velit dignissimos impedit similique doloribus quam dolores mollitia! Sunt, soluta? Aut quis, quaerat illum distinctio at placeat aspernatur quas maxime natus nisi, cumque, veritatis optio atque assumenda?
-                            Pariatur temporibus, vel ipsam eaque impedit sit, reiciendis neque adipisci ratione ea expedita dolor voluptatibus quaerat amet labore et architectо tenetur. Minima officiis dolorem iste laudantium a hic culpa accusantium?
-                            Consectetur, natus. Rerum, similique corrupti a commodi repellat veritatis, asperiores eius deleniti natus dolorum quod dignissimos inventore facere itaque voluptates, dolore molestias blanditiis adipisci illo ut modi architectо recusandae. Nihil.
-                        </p>
+                </section>
+
+                <section className="movies-section">
+                    <div className="section-header">
+                        <h2>Новинки</h2>
+                        <Link to="/movies" className="see-all">{'>'}</Link>
                     </div>
-                </div>
-            </div>
+                    <div className="movies-grid">
+                        {lastFiveMovies.map(movie => (
+                            <MovieCard key={movie.id} {...movie} />
+                        ))}
+                    </div>
+                </section>
+
+                <section className="movies-section">
+                    <div className="section-header">
+                        <h2>У топах</h2>
+                        <Link to="/top" className="see-all">{'>'}</Link>
+                    </div>
+                    <div className="movies-grid">
+                        {topFiveMovies.map(movie => (
+                            <MovieCard key={movie.id} {...movie} />
+                        ))}
+                    </div>
+                </section>
+
+                <section className="movies-section">
+                    <div className="section-header">
+                        <h2>Рекомендації</h2>
+                        <Link to="/recommendations" className="see-all">{'>'}</Link>
+                    </div>
+                    <div className="movies-grid">
+                        {recommendedMovies.map(movie => (
+                            <MovieCard key={movie.id} {...movie} />
+                        ))}
+                    </div>
+                </section>
+
+                <section className="movies-section">
+                    <div className="section-header">
+                        <h2>Нещодавно переглянуті</h2>
+                    </div>
+                    <div className="movies-grid">
+                        {lastFiveViewed.map(movie => (
+                            <MovieCard key={movie.id} {...movie} />
+                        ))}
+                    </div>
+                </section>
+            </main>
         </div>
     );
 }

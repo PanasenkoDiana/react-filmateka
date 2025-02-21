@@ -1,0 +1,27 @@
+.personPage {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    color: white
+}
+
+.person {
+    display: flex;
+    gap: 20px
+}
+
+#personPhoto {
+    border-radius: 20px;
+}
+
+.personInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.moviesList {
+    display: flex;
+    justify-content: center;
+}
