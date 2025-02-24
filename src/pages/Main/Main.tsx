@@ -8,31 +8,28 @@ export function Main() {
     const { movies } = useMovies();
     const { recentlyViewed } = useRecentlyViewed();
 
-    // Сортируем фильмы по году выпуска для новинок (от самых новых)
-    const sortedMoviesByYear = movies.sort((a, b) => b.releaseYear - a.releaseYear);
-    const lastFiveMovies = sortedMoviesByYear.slice(0, 5); // Берем только последние 5 фильмов
+    const moviesArray = Array.isArray(movies) ? movies : [];
 
-    // Сортируем фильмы по рейтингу для топов (от самого высокого к низкому)
-    const sortedMoviesByRating = movies
-        .filter(movie => movie.rating) // Фильтруем фильмы без рейтинга
-        .sort((a, b) => b.rating! - a.rating!); // Сортируем по рейтингу
-    const topFiveMovies = sortedMoviesByRating.slice(0, 5); // Берем только топ 5 фильмов
+    const sortedMoviesByYear = [...moviesArray].sort((a, b) => b.releaseYear - a.releaseYear);
+    const lastFiveMovies = sortedMoviesByYear.slice(0, 5);
 
-    // Ограничиваем количество недавно просмотренных фильмов до 5
-    const lastFiveViewed = recentlyViewed.slice(0, 5); // Берем только последние 5 фильмов
+    const sortedMoviesByRating = [...moviesArray]
+    .filter(movie => typeof movie.rating === "number")
+    .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
+    const topFiveMovies = sortedMoviesByRating.slice(0, 5);
 
-    // Собираем все жанры из недавно просмотренных фильмов
+    const lastFiveViewed = Array.isArray(recentlyViewed) ? recentlyViewed.slice(0, 5) : [];
+
     const recentlyViewedGenres = new Set(
-        lastFiveViewed.flatMap(movie => movie.genres.map(genre => genre.name)) // Получаем все жанры
+        lastFiveViewed.flatMap(movie => movie.genres?.map(genre => genre.name) || [])
     );
 
-    // Рекомендуем фильмы, которые соответствуют хотя бы одному жанру из недавно просмотренных
-    const recommendedMovies = movies
-        .filter(movie =>
-            movie.genres.some(genre => recentlyViewedGenres.has(genre.name)) // Проверяем, есть ли хотя бы один жанр
-        )
-        .slice(0, 5); // Ограничиваем количество рекомендаций до 5
-
+    const recommendedMovies = moviesArray
+        .filter(movie => movie.genres?.some(genre => recentlyViewedGenres.has(genre.name)))
+        .slice(0, 5);
+ 
+    console.log(movies)
+    
     return (
         <div className="main-container">
             <main>
