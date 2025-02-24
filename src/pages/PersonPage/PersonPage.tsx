@@ -5,7 +5,7 @@ import { useMovies } from "../../hooks/useMovies";
 
 import { MovieCard } from "../../shared/MovieCard/MovieCard";
 
-import { IMovie, IRole } from "../../shared/types/types";
+import { IMovie } from "../../shared/types/types";
 
 import "./PersonPage.css"
 
@@ -31,16 +31,16 @@ export function PersonPage() {
         return <div></div>
     }
 
-    let personRoles = String(person.roles[0].role)
+    let personRoles = String(person.roles[0].name)
 
     for (let i = 1; i < person.roles.length; i++) {
-        personRoles += ", " + String(person.roles[i].role);
+        personRoles += ", " + String(person.roles[i].name);
     }
 
     return (
         <div className="personPage">
             <div className="person">
-                <img id="personPhoto" src={person.photo} alt={person.name}/>
+                <img id="personPhoto" src={person.photo || undefined} alt={person.name}/>
                 <div className="personInfo">
                     <h2>{person.name} {person.surname}</h2>
                     <h3>{personRoles}</h3>
@@ -59,18 +59,22 @@ export function PersonPage() {
                             key={movie.id}
                             id={movie.id}
                             title={movie.title}
+                            rating={movie.rating}
                             releaseYear={movie.releaseYear}
                             mainLanguage={movie.mainLanguage}
                             productionCountry={movie.productionCountry}
                             ageRating={movie.ageRating}
-                            shortDescription={movie.shortDescription}
-                            userReviews={movie.userReviews}
-                            genres={movie.genres}
-                            movieStills={movie.movieStills}
                             runtime={movie.runtime}
-                            persons={movie.persons}
                             poster={movie.poster}
+                            shortDescription={movie.shortDescription}
+                            additionalInfo={movie.additionalInfo}
+                            interestingFacts={movie.interestingFacts}
+                            comments={movie.comments}
+                            movieStills={movie.movieStills}
+                            persons={movie.persons}
+                            genres={movie.genres}
                             recentlyViewedMovie={movie.recentlyViewedMovie}
+                            favorite={movie.favorite}
                           />
                         )
                     })}

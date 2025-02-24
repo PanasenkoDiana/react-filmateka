@@ -29,7 +29,7 @@ export function Main() {
                 <div className="films-container">
                     {recentlyViewed.length > 0 ? (
                         recentlyViewed.map((movie: IMovie) => (
-                            <img key={movie.id} className="movie-poster" src={movie.poster} alt={movie.title} />
+                            <img key={movie.id} className="movie-poster" src={movie.poster || undefined} alt={movie.title} />
                         ))
                     ) : (
                         <p className="empty-text">Поки що немає переглянутих фільмів</p>

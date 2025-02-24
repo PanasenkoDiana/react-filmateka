@@ -12,7 +12,7 @@ export function MoviesPage(){
     const { movies } = useMovies()
     const { genres } = useGenres()
 
-    const [filteredMovies, setFilteredMovies] = useState< IMovie[] >([])
+    const [filteredMovies, setFilteredMovies] = useState< IMovie[] >(movies)
     const [checkedGenres, setCheckedGenres] = useState< string[] >([]) 
 
     function selectGenres(genre: string) {
@@ -66,18 +66,22 @@ export function MoviesPage(){
                             key={movie.id}
                             id={movie.id}
                             title={movie.title}
+                            rating={movie.rating}
                             releaseYear={movie.releaseYear}
                             mainLanguage={movie.mainLanguage}
                             productionCountry={movie.productionCountry}
                             ageRating={movie.ageRating}
-                            shortDescription={movie.shortDescription}
-                            userReviews={movie.userReviews}
-                            genres={movie.genres}
-                            movieStills={movie.movieStills}
                             runtime={movie.runtime}
-                            persons={movie.persons}
                             poster={movie.poster}
+                            shortDescription={movie.shortDescription}
+                            additionalInfo={movie.additionalInfo}
+                            interestingFacts={movie.interestingFacts}
+                            comments={movie.comments}
+                            movieStills={movie.movieStills}
+                            persons={movie.persons}
+                            genres={movie.genres}
                             recentlyViewedMovie={movie.recentlyViewedMovie}
+                            favorite={movie.favorite}
                           />
                         )
                     })}

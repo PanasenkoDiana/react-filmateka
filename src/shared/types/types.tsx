@@ -1,7 +1,7 @@
 export interface IGenre {
     id: number;
     name: string;
-    descriptions?: string;
+    descriptions: string | null;
     movies: IMovie[];
 }
 
@@ -15,42 +15,40 @@ export interface IImage {
 export interface IMovie {
     id: number;
     title: string;
-    rating?: number;
+    rating: number | null;
     releaseYear: number;
     mainLanguage: string;
     productionCountry: string;
     ageRating: string;
     runtime: number;
-    poster?: string;
-    shortDescription?: string;
-    additionalInfo?: string;
-    interestingFacts?: string;
-    userReviews: IUserReview[];
+    poster: string | null;
+    shortDescription: string | null;
+    additionalInfo: string | null;
+    interestingFacts: string | null;
+    
+    comments: IComment[];
     movieStills: IImage[];
     persons: IPerson[];
     genres: IGenre[];
     recentlyViewedMovie: IRecentlyViewedMovie[];
+    favorite: IUser[]
 }
 
 export interface IPerson {
     id: number;
     name: string;
-    surname?: string;
-    roles: IRole[];
-    photo?: string;
-    description?: string;
+    surname: string | null;
+    photo: string | null;
+    description?: string | null;
+
+    roles: IPersonRole[];
     movies: IMovie[];
 }
 
-export interface IRole {
+export interface IPersonRole {
     id: number;
-    role: Role;
+    name: String;
     persons: IPerson[];
-}
-
-export enum Role {
-    ACTOR = 'ACTOR',
-    DIRECTOR = 'DIRECTOR'
 }
 
 export interface IRecentlyViewedMovie {
@@ -62,24 +60,30 @@ export interface IRecentlyViewedMovie {
     movie: IMovie;
 }
 
-export interface IUserReview {
+export interface IComment {
     id: number;
-    movieId: number;
-    userId: number;
-    review: string;
+    text: string;
     rating: number;
+
+    movieId: number;
     movie: IMovie;
+    
+    userId: number;
     user: IUser;
 }
 
 export interface IUser {
     id: number;
-    name: string;
+    username: string;
     email: string;
     password: string;
+    profileImage: string | null;
+    age: string | null;
     role: UserRole;
-    userReviews: IUserReview[];
+
+    comments: IComment[];
     recentlyViewedMovies: IRecentlyViewedMovie[];
+    favoriteMovies: IMovie[];
 }
 
 export enum UserRole {

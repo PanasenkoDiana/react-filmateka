@@ -24,7 +24,7 @@ export function MoviePage(){
         <div className='MoviePage'>
             <div className="MainMovie">
                 <div className="Container">
-                    <img src={movie?.poster}alt="123" />
+                    <img src={movie?.poster || undefined}alt="123" />
                     <div className="MainMovieInfo">
                         <div className="JenreAndTime">
                         <p className="Jenre MainText ">

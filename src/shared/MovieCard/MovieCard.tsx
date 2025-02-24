@@ -16,7 +16,7 @@ export function MovieCard(props: IMovie) {
     return (
         <div className="movieCard">
             <Link to={`/movie/${props.id}`}>
-                <img className="movieCardPoster" src={props.poster} alt="" />
+                <img className="movieCardPoster" src={props.poster || undefined} alt="" />
                 <div className="movieCardInfo">
                     <h3 className="movieCardTitle">{props.title}</h3>
                     <div className="movieCardDetails">
