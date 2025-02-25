@@ -3,6 +3,7 @@ import { IMovie } from '../shared/types/types'
 
 interface RecentlyViewedContextType {
   recentlyViewed: IMovie[];
+  
   addToRecentlyViewed: (movie: IMovie) => void;
 }
 

@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Auth.css';
+import { UserContext } from '../../context/UserContext'
+
 
 export function Auth() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const { addToken } = useContext(UserContext)
 
     async function submitAuth(e: React.FormEvent){
         e.preventDefault();
@@ -18,15 +22,17 @@ export function Auth() {
                 email,
                 password,
             }),
+
         })
-
+        
         const result = await response.json()
-
+        
         if (result.status === 'error'){
             alert('Login attempt failed')
         }
         else {
-            localStorage.setItem('token', result.data);
+            addToken(result)
+            // localStorage.setItem('token', result.data);
             // window.location.href = '/';
         }
     }
