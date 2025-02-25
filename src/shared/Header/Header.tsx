@@ -34,7 +34,9 @@ export function Header(){
                     <img src="/img/search.jpg" alt="search" />
                     <input type="text" placeholder="Швидкий пошук" />
                 </div>
-                <button className="AuthButtonHeader">Увійти</button>
+                <Link to="/login">
+                    <button className="AuthButtonHeader">Увійти</button>
+                </Link>
             </div>
         </div>
     )

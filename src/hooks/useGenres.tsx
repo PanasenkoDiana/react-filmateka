@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { IGenre } from "../interfaces"
+import { IGenre } from "../shared/types/types"
 
 export function useGenres() {
     const [genres, setGenres] = useState< IGenre[] >([])

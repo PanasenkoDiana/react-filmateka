@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
+import { IMovie } from "../shared/types/types"
 
 export function useMovies() {
-    const [movies, setMovies] = useState([])
+    const [movies, setMovies] = useState< IMovie[ ]>([])
 
     useEffect(() => {
         async function getMovies() {
