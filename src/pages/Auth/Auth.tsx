@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Auth.css';
 import { UserContext } from '../../context/UserContext'
 
@@ -7,73 +7,52 @@ import { UserContext } from '../../context/UserContext'
 export function Auth() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
-    const { addToken } = useContext(UserContext)
-
-    async function submitAuth(e: React.FormEvent){
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Login attempt with:', { email, password });
-        const response = await fetch('http://localhost:8000/api/user/auth/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email,
-                password,
-            }),
+        setError(null);
 
-        })
-        
-        const result = await response.json()
-        
-        if (result.status === 'error'){
-            alert('Login attempt failed')
+        if (!email || !password) {
+            setError("Пошта і пароль обов'язкові");
+            return;
         }
-        else {
-            addToken(result)
-            // localStorage.setItem('token', result.data);
-            // window.location.href = '/';
+
+        setLoading(true);
+        try {
+            const response = await fetch("http://localhost:8000/api/users/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Помилка авторизації");
+            }
+
+
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("username", data.username);
+
+            console.log("Авторизація успішна:", data);
+            navigate("/"); 
+        } catch (error: any) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
         }
-    }
-
-    // const handleSubmit = (e: React.FormEvent) => {
-    //     e.preventDefault();
-    //     console.log('Login attempt with:', { email, password });
-    //     const auth = fetch('http://localhost:8000/api/user/auth/', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             email,
-    //             password,
-    //         }),
-    //     })
-
-    //     const result = 
-
-    //     if (auth.status === 'error')
-    // };
-
-    // async function authFunc(){
-    //     const auth = fetch('http://localhost:8000/api/user/auth/', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             email,
-    //             password,
-    //         }),
-    //     })
-    // }
+    };
 
     return (
         <div className="auth-container">
             <div className="auth-card">
                 <h2>Авторизація</h2>
-                <form onSubmit={submitAuth}>
+                {error && <p className="error-message">{error}</p>}
+                <form onSubmit={handleSubmit}>
                     <input
                         type="text"
                         placeholder="Пошта або телефон"
@@ -86,7 +65,9 @@ export function Auth() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <button type="submit">Авторизувати</button>
+                    <button type="submit" disabled={loading}>
+                        {loading ? "Авторизуюсь..." : "Авторизувати"}
+                    </button>
                 </form>
                 <div className="auth-links">
                     <span>Авторизація</span>

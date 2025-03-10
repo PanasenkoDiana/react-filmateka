@@ -1,19 +1,23 @@
-import { useState, useEffect } from "react"
-import { IMovie } from "../shared/types/types"
+import { useEffect, useState } from "react";
+import { IPerson } from "../shared/types/types";
 
-export function useMovies() {
-    const [movies, setMovies] = useState<IMovie[]>([])
+
+
+
+export function usePersons() {
+    const [persons, setPersons] = useState<IPerson[]>([])
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string>()
 
 
-    useEffect(() => {
-        async function getMovies() {
+    useEffect(()=>{
+        async function getPersons(){
             try {
-                const response = await fetch("http://localhost:8000/api/movies")
+                setIsLoading(true)
+                const response = await fetch('http://localhost:8000/api/persons')
                 const result = await response.json()
                 if (result.status === 'success') {
-                    setMovies(result.data)
+                    setPersons(result.data)
                 }
                 else {
                     setError(result.message)
@@ -25,8 +29,7 @@ export function useMovies() {
                 setIsLoading(false)
             }
         }
-        getMovies()
-    }, [])
-
-    return { movies: movies, isLoading: isLoading, error: error }
+        getPersons()
+    },[])
+    return {persons: persons, isLoading: isLoading, error: error}
 }
