@@ -7,6 +7,7 @@ import { RecentlyViewedProvider } from "./context/RecentlyViewedContext"
 import { PersonPage } from "./pages/PersonPage/PersonPage"
 import { Auth } from "./pages/Auth/Auth"
 import { Register } from "./pages/Register/Register"
+import { AdminPage } from "./pages/AdminPage/AdminPage"
 
 export function App() {
     return (
@@ -20,6 +21,7 @@ export function App() {
                         <Route path='/movies' element={<MoviesPage />} />
                         <Route path='/movie/:id' element={<MoviePage />} />
                         <Route path='/person/:id' element={<PersonPage/>}></Route>
+                        <Route path="/admin" element={<AdminPage></AdminPage>}></Route>
                     </Route>
                 </Routes>
             </BrowserRouter>

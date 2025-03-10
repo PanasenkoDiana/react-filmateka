@@ -1,0 +1,50 @@
+.adminPage{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 50px;
+    gap: 10px;
+    position: absolute;
+}
+
+.adminPageNav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 6px;
+    gap: 30px;
+}
+
+.AdminPageContent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1200px;
+}
+
+.NavigationButton{
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+    border: none;
+    background: none;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition:  color 100ms ease;
+}
+
+.NavigationButton:hover{
+    color: #ED501B;
+    /* font-size: 28px; */
+}
+
+.Selected{
+    /* color: red; */
+    border-bottom: 5px solid #ED501B;
+}
