@@ -1,127 +1,99 @@
-.moviesDiv{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    align-content: flex-start;
-    padding: 10px;
-    gap: 40px;
-    padding-bottom: 30px;
-}
-
-.createMovie{
+.moviesDiv {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 10px;
-    width: 260px;
-    height: 70px;
+    padding: 20px;
 }
 
-.createMovie button{
+.createMovie {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* width: 235px; */
-    /* height: 48px; */
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.createMovie button {
     background: #767D8D;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+    color: white;
+    font-size: 18px;
+    padding: 10px 15px;
+    border: none;
     border-radius: 5px;
-    font-family: 'Russo One';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    color: #FFFFFF;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: 0.3s;
 }
 
+.createMovie button:hover {
+    background: #5a6275;
+}
 
-.allMovies{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    align-content: flex-start;
+.allMovies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.moviesCard {
+    background: #2e2e2e;
+    border-radius: 8px;
     padding: 10px;
-    gap: 10px;
-}
-
-.moviesCard{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 10px;
-    gap: 10px;
-    width: 350px;
-    height: 200px;
-}
-
-.movieInfo{
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    flex-direction: column;
-}
-
-.movieInfo img{
-    height: 230px;
-    border-radius: 3px;
-}
-
-.movieTitle{
-    font-family: 'Russo One';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    color: #FFFFFF;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.additionalMovieInfo{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 10px;
-}
-
-.additionalMovieInfo p{
-    font-family: 'Russo One';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 11px;
-    display: flex;
     align-items: center;
     text-align: center;
-    color: #A3A3A3;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.movieCardButtons{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 10px;
-    gap: 10px;
-}
-
-.movieCardButtons button{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 4px;
-    background: #767D8D;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+.movieInfo img {
+    width: 100%;
     border-radius: 5px;
-    font-family: 'Russo One';
-    font-style: normal;
-    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.movieTitle {
+    font-family: 'Russo One', sans-serif;
     font-size: 20px;
     color: #FFFFFF;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+    margin-bottom: 5px;
+}
+
+.additionalMovieInfo p {
+    color: #aaa;
+    font-size: 14px;
+    margin: 2px 0;
+}
+
+.movieCardButtons {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.movieCardButtons button {
+    flex: 1;
+    padding: 6px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.movieCardButtons button:first-child {
+    background: #767D8D;
+    color: white;
+}
+
+.movieCardButtons button:first-child:hover {
+    background: #5a6275;
+}
+
+.movieCardButtons button:last-child {
+    background: #D32F2F;
+    color: white;
+}
+
+.movieCardButtons button:last-child:hover {
+    background: #b71c1c;
 }

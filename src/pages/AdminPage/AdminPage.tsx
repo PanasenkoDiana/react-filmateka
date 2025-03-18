@@ -23,9 +23,9 @@ export function AdminPage(){
         <div className="adminPage">
             <div className="adminPageNav">
                 <button onClick={()=>{selectOption('Users')}} className={`NavigationButton ${selectedOption === "Users" ? "Selected" : ''}`}>Коритувачі</button>
-                <button onClick={()=>{selectOption('Persons')}} className={`NavigationButton ${selectedOption === "Persons" ? "Selected" : ''}`}>Коритувачі</button>
-                <button onClick={()=>{selectOption('Movies')}} className={`NavigationButton ${selectedOption === "Movies" ? "Selected" : ''}`}>Коритувачі</button>
-                <button onClick={()=>{selectOption('Genres')}} className={`NavigationButton ${selectedOption === "Genres" ? "Selected" : ''}`}>Коритувачі</button>
+                <button onClick={()=>{selectOption('Persons')}} className={`NavigationButton ${selectedOption === "Persons" ? "Selected" : ''}`}>Актори</button>
+                <button onClick={()=>{selectOption('Movies')}} className={`NavigationButton ${selectedOption === "Movies" ? "Selected" : ''}`}>Фільми</button>
+                <button onClick={()=>{selectOption('Genres')}} className={`NavigationButton ${selectedOption === "Genres" ? "Selected" : ''}`}>Жанри</button>
             </div>
             <div className="AdminPageContent">
                 {selectedOption === 'Users' && <Users></Users>}

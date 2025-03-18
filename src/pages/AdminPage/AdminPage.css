@@ -1,11 +1,11 @@
-.adminPage{
+/* .adminPage{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 10px 50px;
     gap: 10px;
     position: absolute;
-}
+/* } */
 
 .adminPageNav{
     display: flex;
@@ -13,14 +13,15 @@
     align-items: center;
     padding: 10px 6px;
     gap: 30px;
+    margin-left: 17px;
 }
 
-.AdminPageContent{
+/* .AdminPageContent{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 1200px;
-}
+} */
 
 .NavigationButton{
     font-family: 'Russo One';
@@ -41,10 +42,8 @@
 
 .NavigationButton:hover{
     color: #ED501B;
-    /* font-size: 28px; */
 }
 
 .Selected{
-    /* color: red; */
     border-bottom: 5px solid #ED501B;
 }
