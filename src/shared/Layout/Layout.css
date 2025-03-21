@@ -11,3 +11,13 @@ body{
     height: 100%;
     background-color: #1D1D27;
 }
+
+.mainContent{
+    width: 100%;
+    min-height: 64.2vh;
+}
+
+.layout{
+    display: flex;
+    flex-direction: column;
+}
