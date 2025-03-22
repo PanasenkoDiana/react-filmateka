@@ -57,58 +57,70 @@ export function UserModal({ isOpen, onClose, onSubmit, user }: UserModalProps) {
                 <h2>{user ? 'Редагувати користувача' : 'Створити нового користувача'}</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="formGroup">
-                        <label>Ім'я користувача:</label>
                         <input
                             type="text"
+                            placeholder="Ім'я користувача"
                             value={formData.username}
                             onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                             required
                         />
                     </div>
                     <div className="formGroup">
-                        <label>Email:</label>
                         <input
                             type="email"
+                            placeholder="Пошта"
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             required
                         />
                     </div>
                     <div className="formGroup">
-                        <label>Пароль:</label>
                         <input
                             type="password"
+                            placeholder="Пароль"
                             value={formData.password}
                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                             required={!user}
                         />
                     </div>
                     <div className="formGroup">
-                        <label>URL фото профілю:</label>
                         <input
                             type="text"
+                            placeholder="URL фото профілю"
                             value={formData.profileImage}
                             onChange={(e) => setFormData({ ...formData, profileImage: e.target.value })}
                         />
                     </div>
                     <div className="formGroup">
-                        <label>Вік:</label>
                         <input
                             type="text"
+                            placeholder="Вік"
                             value={formData.age}
                             onChange={(e) => setFormData({ ...formData, age: e.target.value })}
                             required
                         />
                     </div>
                     <div className="formGroup">
-                        <label>Роль:</label>
-                        <select
-                            value={formData.role}
-                            onChange={(e) => setFormData({ ...formData, role: e.target.value as 'USER' | 'ADMIN' })}
-                        >
-                            <option value="USER">Користувач</option>
-                            <option value="ADMIN">Адміністратор</option>
-                        </select>
+                        <div className="radioGroup">
+                            <input
+                                type="radio"
+                                id="userRole"
+                                name="role"
+                                value="USER"
+                                checked={formData.role === 'USER'}
+                                onChange={(e) => setFormData({ ...formData, role: e.target.value as 'USER' | 'ADMIN' })}
+                            />
+                            <label htmlFor="userRole">Користувач</label>
+                            <input
+                                type="radio"
+                                id="adminRole"
+                                name="role"
+                                value="ADMIN"
+                                checked={formData.role === 'ADMIN'}
+                                onChange={(e) => setFormData({ ...formData, role: e.target.value as 'USER' | 'ADMIN' })}
+                            />
+                            <label htmlFor="adminRole">Адмін</label>
+                        </div>
                     </div>
                     <div className="modalButtons">
                         <button type="submit">{user ? 'Зберегти' : 'Створити'}</button>
