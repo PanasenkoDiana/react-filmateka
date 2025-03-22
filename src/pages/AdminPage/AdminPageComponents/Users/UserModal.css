@@ -1,0 +1,73 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background: #1E1E1E;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    color: white;
+}
+
+.modalContent h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 5px;
+    color: #FFFFFF;
+}
+
+.formGroup input,
+.formGroup select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #767D8D;
+    border-radius: 4px;
+    background: #2C2C2C;
+    color: #FFFFFF;
+}
+
+.modalButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modalButtons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    background: #767D8D;
+    color: white;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+}
+
+.modalButtons button:hover {
+    opacity: 0.9;
+}
+
+.modalButtons button[type="button"] {
+    background: #4a4a4a;
+}
