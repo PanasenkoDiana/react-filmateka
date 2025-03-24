@@ -9,27 +9,27 @@ export function usePersons() {
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string>()
 
+    const getPersons = async ()=>{
+        try {
+            setIsLoading(true)
+            const response = await fetch('http://localhost:8000/api/persons')
+            const result = await response.json()
+            if (result.status === 'success') {
+                setPersons(result.data)
+            }
+            else {
+                setError(result.message)
+            }
+        } catch (error) {
+            const err = error instanceof Error ? error.message : undefined
+            setError(`${err}`)
+        } finally {
+            setIsLoading(false)
+        }
+    }
 
     useEffect(()=>{
-        async function getPersons(){
-            try {
-                setIsLoading(true)
-                const response = await fetch('http://localhost:8000/api/persons')
-                const result = await response.json()
-                if (result.status === 'success') {
-                    setPersons(result.data)
-                }
-                else {
-                    setError(result.message)
-                }
-            } catch (error) {
-                const err = error instanceof Error ? error.message : undefined
-                setError(`${err}`)
-            } finally {
-                setIsLoading(false)
-            }
-        }
         getPersons()
-    },[])
-    return {persons: persons, isLoading: isLoading, error: error}
+    }, [])
+    return {persons, isLoading, error, refetch: getPersons}
 }
