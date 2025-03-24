@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { usePersons } from "../../../../hooks/usePersons"
 import "./Persons.css"
+import "./PersonsModal.css"
+
 
 export function Persons(){
 
@@ -160,17 +162,20 @@ export function Persons(){
                             onChange={(e) => setPersonSurname(e.target.value)}
                         />
 
-                        <div className="personImage">
-                            {personPhoto ? 
-                            <img src={personPhoto} alt="" /> :
-                            undefined }
+                        <div className="personImageDiv">
+                            <h2>Фото користувача</h2>
+                            <div className="personImage">
+                                {personPhoto ? 
+                                <img src={personPhoto} alt="" /> :
+                                undefined }
 
-                            <input
-                                type="image"
-                                placeholder="Фото (Не обов'язково)"
-                                value={personName}
-                                onChange={(e) => setPersonPhoto(e.target.value)}
-                            />
+                                <input
+                                    type="image"
+                                    placeholder="+"
+                                    value={personName}
+                                    onChange={(e) => setPersonPhoto(e.target.value)}
+                                />
+                            </div>
                         </div>
 
                         <textarea
