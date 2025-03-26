@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { IUser } from '../shared/types/types';
+import { ApiResponse } from '../shared/types/api.types';
+import { UseUsersReturn } from '../shared/types/hooks.types';
 
-// Configure axios base URL
+
 axios.defaults.baseURL = 'http://localhost:8000';
 
-export function useUsers() {
+export function useUsers(): UseUsersReturn {
     const [users, setUsers] = useState<IUser[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -18,8 +20,8 @@ export function useUsers() {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('/api/users');
-            if (response.data.status === 'success') {
+            const response = await axios.get<ApiResponse<IUser[]>>('/api/users');
+            if (response.data.status === 'success' && response.data.data) {
                 setUsers(response.data.data);
                 setIsLoading(false);
             } else {
@@ -34,9 +36,10 @@ export function useUsers() {
 
     const createUser = async (userData: Omit<IUser, 'id'>) => {
         try {
-            const response = await axios.post('/api/users', userData);
-            if (response.data.status === 'success') {
-                setUsers([...users, response.data.data]);
+            const response = await axios.post<ApiResponse<IUser>>('/api/users', userData);
+            if (response.data.status === 'success' && response.data.data) {
+                const newUser = response.data.data;
+                setUsers(prevUsers => [...prevUsers, newUser]);
                 return { success: true };
             } else {
                 throw new Error(response.data.message || 'Failed to create user');
@@ -51,9 +54,11 @@ export function useUsers() {
     const updateUser = async (userData: Omit<IUser, 'id'>) => {
         if (!selectedUser) return { success: false, error: 'No user selected' };
         try {
-            const response = await axios.put(`/api/users/${selectedUser.id}`, userData);
-            if (response.data.status === 'success') {
-                setUsers(users.map(user => user.id === selectedUser.id ? response.data.data : user));
+            const response = await axios.put<ApiResponse<IUser>>(`/api/users/${selectedUser.id}`, userData);
+            if (response.data.status === 'success' && response.data.data) {
+                setUsers(prevUsers => prevUsers.map(user => 
+                    user.id === selectedUser.id && response.data.data ? response.data.data : user
+                ));
                 return { success: true };
             } else {
                 throw new Error(response.data.message || 'Failed to update user');
@@ -65,11 +70,11 @@ export function useUsers() {
         }
     };
 
-    const deleteUser = async (id: string) => {
+    const deleteUser = async (id: number) => {
         try {
-            const response = await axios.delete(`/api/users/${id}`);
+            const response = await axios.delete<ApiResponse<void>>(`/api/users/${id}`);
             if (response.data.status === 'success') {
-                setUsers(users.filter(user => user.id !== id));
+                setUsers(prevUsers => prevUsers.filter(user => user.id !== id));
                 return { success: true };
             } else {
                 throw new Error(response.data.message || 'Failed to delete user');

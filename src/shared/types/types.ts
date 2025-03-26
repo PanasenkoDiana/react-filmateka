@@ -16,18 +16,47 @@ export interface IMovie {
 }
 
 export interface IUser {
-    id: string;
+    id: number;
     email: string;
     username: string;
     password?: string;
     profileImage?: string;
-    age: number;
+    age: string;
     role: 'USER' | 'ADMIN';
-    userReviews: any[];
-    name: string;
-    recentlyViewedMovies: any[];
+    userReviews?: any[];
+    recentlyViewedMovies?: any[];
 }
 
 export interface IUserFormData extends Omit<IUser, 'id' | 'userReviews' | 'recentlyViewedMovies'> {
     password: string;
+}
+
+export interface IGenre {
+    id: number;
+    name: string;
+}
+
+export interface IPerson {
+    id: number;
+    name: string;
+    birthDate: string;
+    deathDate?: string;
+    birthPlace: string;
+    biography: string;
+    photo: string;
+    roles: string[];
+    movies: any[];
+}
+
+export interface IRole {
+    id: number;
+    name: string;
+}
+
+export interface IMovie {
+    id: number;
+    title: string;
+    rating?: number;
+    genres: string[];
+    runtime: number;
 }

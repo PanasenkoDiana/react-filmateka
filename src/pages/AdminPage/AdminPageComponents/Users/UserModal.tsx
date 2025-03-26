@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { IUser } from '../../../../shared/types/types';
+import { IUser, IUserFormData } from '../../../../shared/types/types';
 import './UserModal.css';
 
 interface UserModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onSubmit: (userData: Omit<IUser, 'id'>) => Promise<{ success: boolean; error?: string }>;
+    onSubmit: (userData: IUserFormData) => Promise<{ success: boolean; error?: string }>;
     user: IUser | null;
 }
 
@@ -15,8 +15,9 @@ export function UserModal({ isOpen, onClose, onSubmit, user }: UserModalProps) {
         email: '',
         password: '',
         profileImage: '',
-        age: '',
-        role: 'USER' as 'USER' | 'ADMIN'
+        age: 0,
+        role: 'USER' as 'USER' | 'ADMIN',
+        name: ''
     });
 
     useEffect(() => {
@@ -26,8 +27,9 @@ export function UserModal({ isOpen, onClose, onSubmit, user }: UserModalProps) {
                 email: user.email,
                 password: '',
                 profileImage: user.profileImage || '',
-                age: user.age,
-                role: user.role
+                age: Number(user.age) || 0,
+                role: user.role,
+                name: user.username || ''
             });
         } else {
             setFormData({
@@ -35,15 +37,19 @@ export function UserModal({ isOpen, onClose, onSubmit, user }: UserModalProps) {
                 email: '',
                 password: '',
                 profileImage: '',
-                age: '',
-                role: 'USER'
+                age: 0,
+                role: 'USER',
+                name: ''
             });
         }
     }, [user]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const result = await onSubmit(formData);
+        const result = await onSubmit({
+            ...formData,
+            age: formData.age.toString()
+        });
         if (result.success) {
             onClose();
         }
@@ -93,10 +99,19 @@ export function UserModal({ isOpen, onClose, onSubmit, user }: UserModalProps) {
                     </div>
                     <div className="formGroup">
                         <input
-                            type="text"
+                            type="number"
                             placeholder="Вік"
-                            value={formData.age}
-                            onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+                            value={formData.age || ''}
+                            onChange={(e) => setFormData({ ...formData, age: parseInt(e.target.value) || 0 })}
+                            required
+                        />
+                    </div>
+                    <div className="formGroup">
+                        <input
+                            type="text"
+                            placeholder="Ім'я"
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             required
                         />
                     </div>
