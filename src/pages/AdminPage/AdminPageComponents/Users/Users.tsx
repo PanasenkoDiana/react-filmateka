@@ -19,7 +19,7 @@ export function Users(){
                             <div className="userCard">
                                 <div className="userInfo">
                                     <img src='' alt="user photo" />
-                                    <div className="textDiv">
+                                    <div className="textDirv">
                                         <p>{user.name}</p>
                                     </div>
                                 </div>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { usePersons } from "../../../../hooks/usePersons"
 import "./Persons.css"
 import "./PersonsModal.css"
+import { ImageUploadInput } from "../../../../shared/ImageUploadInput/ImageUploadInput";
 
 
 export function Persons(){
@@ -14,6 +15,10 @@ export function Persons(){
     const [personDescription, setPersonDescription] = useState("")
     const [editingPersonId, setEditingPersonId] = useState<number | null>(null);
 
+
+    const handleFileSelect = (file: string) => {
+        setPersonPhoto(`http://localhost:8000${file}`)
+    };
 
 
 
@@ -130,7 +135,8 @@ export function Persons(){
                                 <div className="personInfo">
                                     <img src={person.photo} alt="person photo" />
                                         <div className="textDiv">
-                                            <p>{person.name}<br />{person.surname}</p>
+                                            <p className="personName">{person.name}</p>
+                                            <p className="personSurname">{person.surname}</p>
                                         </div>
                                     </div>
                                 <div className="personCardButtons">
@@ -166,15 +172,13 @@ export function Persons(){
                             <h2>Фото користувача</h2>
                             <div className="personImage">
                                 {personPhoto ? 
-                                <img src={personPhoto} alt="" /> :
+                                <img src={`http://localhost:8000${personPhoto}`} alt="" /> :
+                                // <img src={`${personPhoto}`} alt="" /> :
                                 undefined }
 
-                                <input
-                                    type="image"
-                                    placeholder="+"
-                                    value={personName}
-                                    onChange={(e) => setPersonPhoto(e.target.value)}
-                                />
+
+                                
+                                <ImageUploadInput onFileSelect={handleFileSelect}></ImageUploadInput>
                             </div>
                         </div>
 
