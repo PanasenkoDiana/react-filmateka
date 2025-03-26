@@ -2,14 +2,30 @@ import { useState } from "react";
 import { useMovies } from "../../../../hooks/useMovies";
 import "./Movies.css";
 import "./MoviesModal.css";
+import { useGenres } from "../../../../hooks/useGenres";
+import { IGenre, IPerson } from "../../../../shared/types/types";
+import { usePersons } from "../../../../hooks/usePersons";
+import { ElementFlags } from "typescript";
 
 export function Movies() {
     const { movies, isLoading, error, refetch } = useMovies();
+    const { genres: allGenres, isLoading: genresIsLoading, error: genresError } = useGenres();
+    const { persons: allPersons, isLoading: personsIsLoading, error: personsError } = usePersons();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [movieTitle, setMovieTitle] = useState("");
     const [releaseYear, setReleaseYear] = useState<number | "">("");
+    const [mainLanguage, setMainLanguage] = useState("");
+    const [productionCountry, setProductionCountry] = useState("");
+    const [ageRating, setAgeRating] = useState("");
+    const [runtime, setRuntime] = useState("");
+    const [shortDescription, setShortDescription] = useState("");
+    const [additionalInfo, setAdditionalInfo] = useState("");
+    const [interestingFacts, setInterestingFacts] = useState("");
+    const [genres, setGenres] = useState<IGenre[]>([]);
+    const [persons, setPersons] = useState<IPerson[]>([]);
     const [posterUrl, setPosterUrl] = useState("");
     const [editingMovieId, setEditingMovieId] = useState<number | null>(null);
+    const [filteredPerson, setFilteredPerson] = useState<IPerson[]>([]);
 
     const handleDeleteMovie = async (id: number) => {
         try {
@@ -31,7 +47,7 @@ export function Movies() {
     };
 
     const handleCreateMovie = async () => {
-        if (!movieTitle || !releaseYear) {
+        if (!movieTitle || !releaseYear || !mainLanguage || !productionCountry || !productionCountry || !ageRating || !runtime) {
             alert("Будь ласка, заповніть усі поля");
             return;
         }
@@ -45,7 +61,16 @@ export function Movies() {
                 body: JSON.stringify({
                     title: movieTitle,
                     releaseYear: Number(releaseYear),
-                    posterUrl,
+                    mainLanguage: mainLanguage,
+                    productionCountry: productionCountry,
+                    ageRating: ageRating,
+                    shortDescription: shortDescription,
+                    runtime: Number(runtime),
+                    additionalInfo: additionalInfo,
+                    interestingFacts: interestingFacts,
+                    genres: genres,
+                    posterUrl: posterUrl,
+                    persons: persons,
                 }),
             });
 
@@ -65,7 +90,7 @@ export function Movies() {
     };
 
     const handleUpdateMovie = async () => {
-        if (!movieTitle || !releaseYear || !editingMovieId) {
+        if (!movieTitle || !releaseYear || !mainLanguage || !productionCountry || !productionCountry || !ageRating || !runtime || !editingMovieId) {
             alert("Будь ласка, заповніть усі поля");
             return;
         }
@@ -79,7 +104,16 @@ export function Movies() {
                 body: JSON.stringify({
                     title: movieTitle,
                     releaseYear: Number(releaseYear),
-                    posterUrl,
+                    mainLanguage: mainLanguage,
+                    productionCountry: productionCountry,
+                    ageRating: ageRating,
+                    shortDescription: shortDescription,
+                    runtime: Number(runtime),
+                    additionalInfo: additionalInfo,
+                    interestingFacts: interestingFacts,
+                    genres: genres,
+                    posterUrl: posterUrl,
+                    persons: persons
                 }),
             });
 
@@ -98,19 +132,71 @@ export function Movies() {
         }
     };
 
+    function selectGenre(selectedGenre: IGenre) {
+        setGenres((prevCheckedGenres) =>
+            prevCheckedGenres.includes(selectedGenre)
+                ? prevCheckedGenres.filter((genre) => genre !== selectedGenre)
+                : [...prevCheckedGenres, selectedGenre]
+        );
+    }
+
+    function checkGenres(id: number) {
+        return genres.some((genre) => {
+            return genre.id == id
+        })
+    }
+
+    function selectPerson(selectedPerson: IPerson) {
+        setPersons((prevCheckedPersons) =>
+            prevCheckedPersons.includes(selectedPerson)
+                ? prevCheckedPersons.filter((person) => person !== selectedPerson)
+                : [...prevCheckedPersons, selectedPerson]
+        );
+    }
+
+    function checkPersons(id: number) {
+        return persons.some((person) => {
+            return person.id == id
+        })
+    }
+
+    function searchPerson(text: string) {
+        setFilteredPerson(allPersons.filter((person) =>
+            person.name.toLowerCase().includes(text.toLowerCase())
+        ));
+    }
+
     const handleEditClick = (movie: any) => {
-        setMovieTitle(movie.title);
-        setReleaseYear(movie.releaseYear);
+        setMovieTitle(movie.title || "");
+        setReleaseYear(movie.releaseYear || "");
+        setMainLanguage(movie.mainLanguage || "");
+        setProductionCountry(movie.productionCountry || "");
+        setAgeRating(movie.ageRating || "")
+        setRuntime(movie.runtime || "")
+        setShortDescription(movie.shortDescription || "")
+        setAdditionalInfo(movie.additionalInfo || "")
+        setInterestingFacts(movie.interestingFacts || "")
+        setGenres(movie.genres || "")
         setPosterUrl(movie.posterUrl || "");
         setEditingMovieId(movie.id);
         setIsModalOpen(true);
+        setPersons([])
     };
 
     const resetForm = () => {
         setMovieTitle("");
         setReleaseYear("");
-        setPosterUrl("");
+        setMainLanguage("");
+        setProductionCountry("");
+        setAgeRating("")
+        setShortDescription("")
+        setAdditionalInfo("")
+        setInterestingFacts("")
+        setPosterUrl("")
+        setRuntime("")
         setEditingMovieId(null);
+        setGenres([])
+        setPersons([])
     };
 
     return (
@@ -164,7 +250,73 @@ export function Movies() {
                         />
                         <input
                             type="text"
-                            placeholder="URL постера"
+                            placeholder="Основна мова"
+                            value={mainLanguage}
+                            onChange={(e) => setMainLanguage(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Країна"
+                            value={productionCountry}
+                            onChange={(e) => setProductionCountry(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Віковий рейтинг"
+                            value={ageRating}
+                            onChange={(e) => setAgeRating(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Тривалість"
+                            value={runtime}
+                            onChange={(e) => setRuntime(e.target.value)}
+                        />
+                        <input
+                            id="shortDescription"
+                            type="text"
+                            placeholder="Короткий опис (не обов'язково)"
+                            value={shortDescription}
+                            onChange={(e) => setShortDescription(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Додатково інформація (не обов'язково)"
+                            value={additionalInfo}
+                            onChange={(e) => setAdditionalInfo(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Інтересні факти (не обов'язково)"
+                            value={interestingFacts}
+                            onChange={(e) => setInterestingFacts(e.target.value)}
+                        />
+                        <div className="list">
+                            { !genresIsLoading ? (!genresError ? allGenres.map((genre) => (
+                                <div className="genre">
+                                    <input type="checkbox" id={String(genre.id)} name={String(genre.id)} onChange={() => selectGenre(genre)} checked={checkGenres(genre.id)}/>
+                                    <label htmlFor={String(genre.id)}>{genre.name}</label>
+                                </div>
+                            )) : (
+                                <div>{genresError}</div>
+                            )) : <div>loading</div>
+                            }
+                        </div>
+                        <div className="list">
+                            <input type="text" id="searchPerson" onChange={(e) => searchPerson(e.target.value)}/>
+                            { !personsIsLoading ? (!personsError ? allPersons.map((person) => (
+                                <div className="person">
+                                    <input type="checkbox" id={String(person.id)} name={String(person.id)} onChange={() => selectPerson(person)} checked={checkPersons(person.id)}/>
+                                    <label htmlFor={String(person.id)}>{person.name}{person.surname}</label>
+                                </div>
+                            )) : (
+                                <div>{personsError}</div>
+                            )) : <div>loading</div>
+                            }
+                        </div>
+                        <input
+                            type="url"
+                            placeholder="URL Постера"
                             value={posterUrl}
                             onChange={(e) => setPosterUrl(e.target.value)}
                         />
