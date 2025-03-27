@@ -29,7 +29,7 @@ export function Movies() {
 
     const handleDeleteMovie = async (id: number) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/movies/${id}`, {
+            const response = await fetch(`http://localhost:8000/api/movies/delete/${id}`, {
                 method: "DELETE",
             });
 
@@ -96,7 +96,7 @@ export function Movies() {
         }
 
         try {
-            const response = await fetch(`http://localhost:8000/api/movies/${editingMovieId}`, {
+            const response = await fetch(`http://localhost:8000/api/movies/edit/${editingMovieId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
